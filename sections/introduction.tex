@@ -1,0 +1,17 @@
+\section{Introduction}
+\label{sec:introduction}
+
+\subsection{Motivation}
+The motivation for using microservices is that it provides an easy way to deploy and scale your applications, makes your codebase smaller and easier to maintain while also adding a layer of resilience inherited from the microservice pattern. This is something that is heavily sought after in the enterprise industry as trying to keep the codebase up to date, tested and then deployed can be a very difficult task once the project starts to grow in size as it eventually becomesr impossible to have insight and overview over the entire project. This is the motivation Thorntail is working with as their framework is made to build microservice applications on top of.
+
+\subsection{Thorntail's History}
+Thorntail (then called Wildfly Swarm) had their first alpha release in January 2016 and is based on Wildfly which is an application server started by JBoss in 1999 and then renamed to Wildfly in 2014. Somewhere between 2014 and 2016 (this is based on when they first started blogging about Wildfly Swarm and when they had their first public alpha release [3]), RedHat decided to branch off from their application server and create Wildfly Swarm which uses a reconstruction of Wildfly to create what is called just enough application server. This means that Thorntail is actually just a fraction of the original application server Wildfly and the idea is that you don’t want to load the entire application server with all of its modules every time you start your server when you’re creating microservices. Since then Thorntail has focused on shaping their technology more and more towards being an open source microservice framework free for everyone to use. \cite{ThorntailAnnouncement}
+
+\subsection{Related Technologies}
+As Thorntail has a lot in common with Spring Boot they have created a dependency that allows you to build traditional Spring projects within your Thorntail project allowing developers to take advantage of both frameworks within the same project. We started using this Thorntail fraction for our frontend microservice, but due to the time limitations, we didn’t get to finish it.
+
+\subsection{Results}
+The results of our project show that Thorntail is very much comparable to Spring Boot and that they’re both trying to solve the same problems, but Spring Boot is a more mature and documented framework proven by the age of the two frameworks as well as the number of search results Google yields (230 000 for Thorntail and 559 000 000 for Spring Boot). We have also found that configuring, deploying and running microservices can be a lot easier than configuring and deploying full application servers, but the different microservices require more preplanning and overview than what was required when making using an application server.
+\newpage
+\subsection{Article Overview}
+In this report we will focus on planning, creating and deploying microservices specifically with Thorntail. The first section~\ref{sec:background} we will go in-depth about the microservice architecture, what Thorntail is and what it contains, then the next section~\ref{sec:prototype} we will go into detail about our very own prototype, what we built and how it all went. Section~\ref{sec:experiments} aims to compare the microservice architecture with more traditional architectures and finally in section~\ref{sec:conclusion} we will reveal our final conclusion using our findings and the comparisons we made in the earlier section.

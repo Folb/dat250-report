@@ -1,0 +1,74 @@
+\documentclass[11pt]{article}
+
+\usepackage{a4wide}
+\usepackage{mathptm}
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{tikz}
+\usepackage{tkz-graph}
+\usetikzlibrary{shapes.misc, positioning}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\begin{document}
+
+\title{Thorntail Microservice Evaluation Project}
+
+\author{Simon Halvorsen, Øystein Follo and Runar Serigstad}
+
+\maketitle
+\frontmatter
+\begin{abstract}
+
+\noindent This is a report about what the Thorntail framework is, what it was like working with it, and the solutions we built using it. The prototype we built during this project was a microservice based system for keeping track of available offices at Western Norway University of Applied Sciences. We will also introduce you to the tasks and challenges we were given and what role Thorntail played in this. Finally, we will do an analysis and a comparison between Thorntail, Glassfish and Spring Boot so we can help you understand what kind of framework you may want to use in your own projects. It is worth mentioning that Thorntail is still somewhat new to the software world while the technology we’re comparing to has been around since 2005 (Glassfish first release) and 2003 (Spring first release), Thorntail had their first alpha release in 2016 (then called Wildfly Swarm).
+
+\thispagestyle{empty}
+  
+\end{abstract}
+
+\newpage
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+%\input{commands}
+\setcounter{page}{1}
+\input{sections/introduction}
+\newpage
+\input{sections/background}
+\newpage
+\input{sections/prototype}
+\newpage
+\input{sections/experiments}
+
+\input{sections/conclusion}
+\newpage
+\bibliographystyle{plain}
+\bibliography{report.bib}{}
+
+\end{document}

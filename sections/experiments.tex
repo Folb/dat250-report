@@ -1,0 +1,60 @@
+\section{Test-bed Environment and Experimental Results}
+\label{sec:experiments}
+
+\subsection{Planning and Design}
+The first thing we noticed was that the microservice architecture required more careful planning as we needed to know exactly what kind of microservices we would need before we could even start working on the project as well as we had to find a common way we could communicate between our different services. While the Glassfish Java EE application had to design and plan data structures, security and client-server communications the microservice application had to design and plan all of this in addition to the previously mentioned preplanning. This meant that our microservice application required additional design time before we could start the actual development of our application, but it also meant that we already knew who would be working on what service and what role that service would play in the application before we had even begun writing a single line of code.
+
+\subsection{Initial Setup and Configuration}
+Due to the nature of microservice architecture the frameworks built for this kind of architecture has all the required configuration inside the source code of the application, while the traditional monolith application will have the server configuration put inside the application server running the source code, this means that setting up the same server running locally on our three different machines required us to make sure we were all running the exact same version of the application server and that we all had the exact same configuration setup. The initial setup for Thorntail was very simple, they gave us a generate button on their website that generated the initial configuration, folder structure and dependencies we needed to get a kick-start to our project while Glassfish was a lot more researching the documentation and reading up on configuration then testing and trying until you got it to work on your computer then tell everyone else on the group to attempt to do exactly the same as you just did.
+
+\subsection{Development}
+The largest difference between developing with a microservice architecture compared to a monolithic architecture was that each one of us worked with our very own project, we were each our own team and instead of programming together we were simply communicating together, this meant that we all had an individual GitHub repo and we could be much more free on how we developed our service. When building the Java EE Glassfish server we had all of our different java classes and structures all put into one single project which quickly made it messy, especially since we had SOAP endpoints, REST endpoints, and normal XHTML endpoints all built into the same application, when we instead could’ve built one microservice for each of these different endpoints, it would’ve kept the project structure a lot simpler and made it easier to work with. It seemed to us that a big company could benefit from using microservices by dividing each microservice into a more tightly coupled team of developers that then communicates with the other teams, that way they could each choose their own technology that best suits their needs. The largest problems we encountered during the development process while using the microservice architecture was when a team updated their endpoints without announcing it to the other teams that were using their endpoint in their service, this meant that breaking changes to the endpoint had to be fixed in every service that used them.
+
+\subsection{Deployment}
+Thorntail made deploying all our different services simple as the only requirement to run the application is to have the correct version of Maven and the Java JDK installed, then all we had to do to start the application was to run a terminal command
+\begin{lstlisting}[language=bash]
+  $ mvn thorntail:run
+\end{lstlisting} or
+\begin{lstlisting}[language=bash]
+  $ java -jar thorntailservice.jar
+\end{lstlisting} if the project had already been compiled to a jar file. When deploying the Glassfish server you were required to have the correct version of Glassfish and the Java JDK installed as well as the correct configuration before you could run the command 
+\begin{lstlisting}[language=bash]
+  $ asadmin start-domain
+\end{lstlisting}, then 
+\begin{lstlisting} [language=bash]
+  $ asadmin deploy <.war location>
+\end{lstlisting}
+and if you wanted a local database you also had to run the command 
+\begin{lstlisting}
+  $ asadmin start-database
+\end{lstlisting}
+, while the Thorntail command started everything for you.
+
+\subsection{Response Time}
+We performed a response time test of our microservice application by running HTTP requests to a specific endpoint in the controller and then printing the time it took to get a response for the request. After testing the microservice application we tested it as a monolith application by running the same request to the equivalent endpoint directly to the service itself instead of going through the controller. Below is the response time (in ms) for our login endpoint when set up as a microservice and when it’s set up as a monolith. \\
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{ccc}
+  Request# & Microservice & Monolithic
+  \\ \hline
+1 & 557.321  &    101.522 \\
+2 & 92.327   &    57.58 \\
+3 & 553.268  &    22.909 \\
+4 & 147.223   &    49.168 \\
+5 & 131.688   &    71.541 \\
+6 & 93.646   &    120.513 \\
+7 & 73.144   &    85.397 \\
+8 & 139.275   &    61.725 \\
+9 & 127.242   &    72.325 \\
+10 & 72.602   &    32.835 \\
+\hline
+Sum & 1987.736   &    675.515 \\
+Avg & 198.7736   &    67.5515 \\
+
+\end{tabular}
+\caption{Selected experimental results on the communication protocol example.}
+\label{tab:results}
+\end{table}
+
+\noindent You can see from the table~\ref{tab:results} that the response time has been significantly increased by using microservices, but as a reader you need to be aware that this data is exaggerated due to the fact that we ran the tests while the client was connected to the same network as the server (and everyone ran a wireless connection), but in most real cases you will be connected to a server in the cloud or at least a server in a different area which would make the average 131ms difference a lot less significant compared to what it looks like here. It is also worth mentioning that our servers were running on common student laptops and not a dedicated server. Due to these factors playing an important role in the results above we can only conclude that our microservice will take longer time responding to a request compared to what our monolith application does, but we can’t know for sure how large the difference in response times will be when our application is fully deployed. Our assumption is that the difference in milliseconds will lower quite a lot as a dedicated server directly connected to its services will lower the time it takes for the controller to send a request to the correct service and that the HTTP overhead will play a more significant role than it did during our tests.
